@@ -45,13 +45,6 @@ extern void guard_bio_eod(int rw, struct bio *bio);
 extern void __init chrdev_init(void);
 
 /*
- * namei.c
- */
-extern int user_path_mountpoint_at(int, const char __user *, unsigned int, struct path *);
-extern int vfs_path_lookup(struct dentry *, struct vfsmount *,
-			   const char *, unsigned int, struct path *);
-
-/*
  * namespace.c
  */
 extern int copy_mount_options(const void __user *, unsigned long *);
@@ -142,11 +135,6 @@ extern int rw_verify_area(int, struct file *, const loff_t *, size_t);
 
 /*
  * pipe.c
- */
-extern const struct file_operations pipefifo_fops;
-
-/*
- * fs_pin.c
  */
 extern void sb_pin_kill(struct super_block *sb);
 extern void mnt_pin_kill(struct mount *m);
