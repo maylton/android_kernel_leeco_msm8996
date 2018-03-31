@@ -693,7 +693,6 @@ static void mdss_dsi_panel_bl_ctrl(struct mdss_panel_data *pdata,
 		led_trigger_event(bl_led_trigger, bl_level);
 		break;
 	case BL_PWM:
-		lm3697_bl_set(bl_level);
 		mdss_dsi_panel_bklt_pwm(ctrl_pdata, bl_level);
 		break;
 	case BL_DCS_CMD:
