@@ -47,6 +47,7 @@ extern void __init chrdev_init(void);
 /*
  * namespace.c
  */
+extern int user_path_mountpoint_at(int, const char __user *, unsigned int, struct path *);
 extern int copy_mount_options(const void __user *, unsigned long *);
 extern char *copy_mount_string(const void __user *);
 
@@ -136,6 +137,7 @@ extern int rw_verify_area(int, struct file *, const loff_t *, size_t);
 /*
  * pipe.c
  */
+extern const struct file_operations pipefifo_fops;
 extern void sb_pin_kill(struct super_block *sb);
 extern void mnt_pin_kill(struct mount *m);
 
