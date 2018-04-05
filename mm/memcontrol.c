@@ -5958,7 +5958,7 @@ static int mem_cgroup_can_attach(struct cgroup_subsys_state *css,
 static int mem_cgroup_allow_attach(struct cgroup_subsys_state *css,
 				   struct cgroup_taskset *tset)
 {
-	return subsys_cgroup_allow_attach(css->cgroup, tset);
+	return subsys_cgroup_allow_attach(css, tset);
 }
 
 static void mem_cgroup_cancel_attach(struct cgroup_subsys_state *css,
@@ -6143,23 +6143,6 @@ static void mem_cgroup_move_task(struct cgroup_subsys_state *css,
 {
 }
 #endif
-
-static int mem_cgroup_allow_attach(struct cgroup *cgrp,
-				 struct cgroup_taskset *tset)
-{
-	const struct cred *cred = current_cred(), *tcred;
-	struct task_struct *task;
-
-	cgroup_taskset_for_each(task, cgrp, tset) {
-		tcred = __task_cred(task);
-
-		if ((current != task) && !capable(CAP_SYS_ADMIN) &&
-		    !uid_eq(cred->euid, tcred->uid) && !uid_eq(cred->euid, tcred->suid))
-			return -EACCES;
-	}
-
-	return 0;
-}
 
 /*
  * Cgroup retains root cgroups across [un]mount cycles making it necessary
